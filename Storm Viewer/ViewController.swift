@@ -30,7 +30,7 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        cell.textLabel?.text = pictutes[indexPath.row]
+        cell.textLabel?.text = Array.sorted(pictutes)()[indexPath.row]
         return cell
     }
 
@@ -41,6 +41,8 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictutes[indexPath.row]
+            vc.amoutOfImages = pictutes.count
+            vc.picturesPosition = indexPath[1]
             navigationController?.pushViewController(vc, animated: true)
         }
     }
